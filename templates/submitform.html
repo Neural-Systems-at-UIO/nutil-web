@@ -1,0 +1,102 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js"></script>
+
+<tr><td>
+<h1>Nutil Web</h1>
+</td></tr>
+<tr><td>
+	<table style="width:100px">
+		<tr><td>
+
+  <script>
+var scene = new THREE.Scene();  
+var width = window.innerWidth;
+var height = 200
+var camera = new THREE.PerspectiveCamera( 25, width/height, 0.1, 1000 ); 
+
+var renderer = new THREE.WebGLRenderer(); 
+renderer.setSize( width, height ); 
+document.body.appendChild( renderer.domElement );
+
+cubes = []
+
+renderer.setClearColor( 0xD3D3D3, 1);
+
+camera.position.z = 22;
+
+var N = 32
+
+const loader = new THREE.TextureLoader();
+
+const material = new THREE.MeshBasicMaterial({
+    	map: loader.load("{% static 'nutil.png' %}"),
+  		});
+
+for (var i=0;i<N;i++) {
+
+
+
+var z = 4;
+var geometry = new THREE.BoxGeometry( z, z, z );
+//var geometry = new THREE.DodecahedronGeometry( z, 0, 9 );
+//var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var cube = new THREE.Mesh( geometry, material );
+cube.position.x = (i-N/2)*4
+scene.add( cube );
+cubes.push(cube)
+}
+
+var time = 0
+var dx = 0
+var shift = 0
+//Create an render loop to allow animation
+var render = function () {
+    requestAnimationFrame( render );
+	time = time + 0.03 
+	dx = dx +0.03
+
+
+camera.fov = 25 + Math.sin(time*0.231)*10;
+camera.updateProjectionMatrix();
+
+	if (dx>1) {
+		dx = 0
+		shift++
+	}   
+    for (var i=0;i<N;i++) {
+
+	    cubes[i].rotation.x = Math.sin(time+(i-shift)*0.2)*2.0 + time;
+	    cubes[i].rotation.y = Math.sin(time*1.1+(i-shift)*0.3)*0.2;
+		cubes[i].position.x = ((i)-N/2 + dx)*4
+		cubes[i].position.y = Math.sin(time*1+(i-shift)*0.4)*1;
+
+ 	}
+//    cube.rotation.y += 0.0177;
+//    cube.rotation.z -= 0.0131;
+
+    renderer.render(scene, camera);
+};
+
+render();
+
+</script>
+</td></tr>
+</table>
+</td></tr> 
+
+<tr>
+<td>
+
+<!--<img src="{% static 'nutil.png' %}" alt="My image" width=200>-->
+</td></tr>
+<tr><td>
+<form action="/execute/run/" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	 {{ form }}
+<input type="submit" value="Submit">
+</form> 
+</td></tr>
+</body>

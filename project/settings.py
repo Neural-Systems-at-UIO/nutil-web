@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+#    'debug_toolbar',
     'welcome',
+    'execute',
 ]
 
 MIDDLEWARE = [
@@ -54,8 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'whitenoise.middleware.WhiteNoiseMiddleware',
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates/' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,8 +127,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [
+    BASE_DIR + "/static",
+    '/var/www/static/',
+]
 
-INTERNAL_IPS = ['127.0.0.1']

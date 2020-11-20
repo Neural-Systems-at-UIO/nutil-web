@@ -1,8 +1,11 @@
 from django.conf import settings
-from django.conf.urls import include, url
 from django.contrib import admin
-
+from django.contrib import admin
+from django.conf.urls import include
+from django.conf.urls import url
 from welcome.views import index, health
+from execute import views
+#from execute.views import index, health
 
 urlpatterns = [
     # Examples:
@@ -10,6 +13,8 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', index),
+    #url('execute/', include(views.index)),
+    url('execute/', views.index, name='index'),
     url(r'^health$', health),
     url(r'^admin/', include(admin.site.urls)),
 ]
