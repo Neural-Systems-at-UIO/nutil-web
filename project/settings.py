@@ -136,7 +136,7 @@ USE_TZ = True
 #STATIC_ROOT =  PROJECT_PATH + "/static/"
 
 
-STATIC_ROOT = os.path.join(get_env_variable('OPENSHIFT_REPO_DIR'), 'wsgi', 'static', 'collected_static')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'wsgi', 'static', 'collected_static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
