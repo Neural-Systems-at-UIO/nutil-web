@@ -1,5 +1,5 @@
 import os
-
+#from whitenoise import *
 
 from django.core.exceptions import ImproperlyConfigured
 
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
