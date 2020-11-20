@@ -38,6 +38,5 @@ POD_INSTANCE_NAME=`oc get pods \
   -t "{{ with index .items ${POD_INDEX:-0} }}{{ .metadata.name }}{{ end }}"`
 
 # Run command in a container of the specified pod:
-./run-in-container.sh ./manage.py migrate --run-syncdb
-
-oc exec -p "$POD_INSTANCE_NAME" -it -- bash -c "${@:-echo}"
+echo $POD_INSTANCE_NAME
+oc exec $POD_INSTANCE_NAME -it -- bash -c "${@:-echo}"
