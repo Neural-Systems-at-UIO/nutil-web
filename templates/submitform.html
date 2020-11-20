@@ -30,11 +30,14 @@ camera.position.z = 22;
 var N = 32
 
 const loader = new THREE.TextureLoader();
+loader.crossOrigin = "Anonymous"
 
 const material = new THREE.MeshBasicMaterial({
     	map: loader.load("{% static 'nutil.png' %}"),
   		});
 
+
+material.needsUpdate = true
 for (var i=0;i<N;i++) {
 
 
